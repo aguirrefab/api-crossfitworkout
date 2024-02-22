@@ -1,9 +1,8 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3001;
+const express = require('express')
+const app = express()
+const PORT = process.env.PORT || 3001
+const v1Routes = require('./v1/routes')
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hola mundo from node</h1>');
-});
+app.use('./api/v1', v1Routes)
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`))
