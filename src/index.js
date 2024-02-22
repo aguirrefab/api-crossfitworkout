@@ -1,8 +1,12 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+
 const app = express()
 const PORT = process.env.PORT || 3001
-const v1Routes = require('./v1/routes')
 
-app.use('./api/v1', v1Routes)
+const v1WorkoutRouter = require('./v1/routes/workoutRoutes')
+
+app.use(bodyParser.json())
+app.use('/api/v1/workouts', v1WorkoutRouter)
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`))
