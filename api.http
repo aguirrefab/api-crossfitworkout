@@ -9,8 +9,8 @@ GET  http://localhost:3001/api/v1/workouts/1cbbefe9-399d-44a3-8aee-ede584aa818d
 POST http://localhost:3001/api/v1/workouts
 
 {
-  "name": "Core Buster",
-  "mode": "AMRAP 20",
+  "name": "My rutine",
+  "mode": "AMRAP 520",
   "equipment": [
     "rack",
     "barbell",

@@ -14,6 +14,6 @@ router
 
   .patch('/:workoutId', workoutController.updateWorkout)
 
-  .delete('/:workoutId', workoutController.deleteOneWorkout)
+  .delete('/:workoutId', workoutController.deleteWorkout)
 
 module.exports = router

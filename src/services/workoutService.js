@@ -1,15 +1,24 @@
+/* eslint-disable no-useless-catch */
 const Workout = require('../database/Workout')
 
 const { v4: uuid } = require('uuid')
 
 const getAllWorkouts = () => {
-  const allWorkouts = Workout.getAllWorkouts()
-  return allWorkouts
+  try {
+    const allWorkouts = Workout.getAllWorkouts()
+    return allWorkouts
+  } catch (error) {
+    throw error
+  }
 }
 
 const getWorkout = (workoutId) => {
-  const workout = Workout.getWorkout(workoutId)
-  return workout
+  try {
+    const workout = Workout.getWorkout(workoutId)
+    return workout
+  } catch (error) {
+    throw error
+  }
 }
 
 const createNewWorkout = (newWorkout) => {
@@ -19,17 +28,29 @@ const createNewWorkout = (newWorkout) => {
     createdAt: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
     updatedAt: new Date().toLocaleString('en-US', { timeZone: 'UTC' })
   }
-  const createdWorkout = Workout.createNewWorkout(workoutToInsert)
-  return createdWorkout
+  try {
+    const createdWorkout = Workout.createNewWorkout(workoutToInsert)
+    return createdWorkout
+  } catch (error) {
+    throw error
+  }
 }
 
 const updateWorkout = ({ workoutId, body }) => {
-  const updatedWorkout = Workout.updateWorkout(workoutId, body)
-  return updatedWorkout
+  try {
+    const updatedWorkout = Workout.updateWorkout(workoutId, body)
+    return updatedWorkout
+  } catch (error) {
+    throw error
+  }
 }
 
-const deleteOneWorkout = () => {
-  return
+const deleteWorkout = (workoutId) => {
+  try {
+    return Workout.deleteWorkout(workoutId)
+  } catch (error) {
+    throw error
+  }
 }
 
 module.exports = {
@@ -37,5 +58,5 @@ module.exports = {
   getWorkout,
   createNewWorkout,
   updateWorkout,
-  deleteOneWorkout
+  deleteWorkout
 }
