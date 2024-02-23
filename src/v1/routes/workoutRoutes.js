@@ -5,14 +5,15 @@ const router = express.Router()
 
 /// define endpoints to workout resource
 
-router.get('/', workoutController.getAllWorkouts)
+router
+  .get('/', workoutController.getAllWorkouts)
 
-router.get('/:workoutId', workoutController.getOneWorkout)
+  .get('/:workoutId', workoutController.getWorkout)
 
-router.post('/', workoutController.createNewWorkout)
+  .post('/', workoutController.createNewWorkout)
 
-router.patch('/:workoutId', workoutController.updateOneWorkout)
+  .patch('/:workoutId', workoutController.updateWorkout)
 
-router.delete('/:workoutId', workoutController.deleteOneWorkout)
+  .delete('/:workoutId', workoutController.deleteOneWorkout)
 
 module.exports = router

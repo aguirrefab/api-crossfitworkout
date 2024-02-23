@@ -3,7 +3,7 @@ GET http://localhost:3001/api/v1/workouts
 
 
 ###
-GET  http://localhost:3001/api/v1/workouts/10
+GET  http://localhost:3001/api/v1/workouts/1cbbefe9-399d-44a3-8aee-ede584aa818d
 
 ###
 POST http://localhost:3001/api/v1/workouts
@@ -30,8 +30,20 @@ POST http://localhost:3001/api/v1/workouts
 
 
 ###
-PATCH http://localhost:3001/api/v1/workouts/10
+PATCH http://localhost:3001/api/v1/workouts/1cbbefe9-399d-44a3-8aee-ede584aa818d
 
-
+{
+  "name": "Pato pampa",
+  "mode": "Full",
+  "equipment": [
+    "pato",
+    "pato333",
+  ], 
+  "trainerTips": [
+    "Split your toes to bars into two sets maximum",
+    "Go unbroken on the thrusters",
+    "Take the abmat sit-ups as a chance to normalize your breath"
+  ]
+}
 ###
 DELETE  http://localhost:3001/api/v1/workouts/10

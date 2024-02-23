@@ -2,17 +2,53 @@ const workoutService = require('../services/workoutService')
 
 const getAllWorkouts = (req, res) => {
   const allWorkouts = workoutService.getAllWorkouts()
-  res.send({ status: 'OK', data: allWorkouts })
+  if (!allWorkouts) {
+    res.status(404).send({
+      status: 'FAILED',
+      data: {
+        error: 'Cannot get all workouts'
+      }
+    })
+  }
+  res.status(200).send({ status: 'OK', data: allWorkouts })
 }
 
-const getOneWorkout = (req, res) => {
-  const workout = workoutService.getOneWorkout()
-  res.send('Get an existing workout')
+const getWorkout = (req, res) => {
+  const {
+    params: { workoutId }
+  } = req
+  if (!workoutId) {
+    res.status(400).send({
+      status: 'FAILED',
+      data: {
+        error:
+          "One of the following keys is missing or is empty in request body: 'id'"
+      }
+    })
+    return
+  }
+  const workout = workoutService.getWorkout(workoutId)
+  res.status(200).send({ status: 'OK', data: workout })
 }
 
 const createNewWorkout = (req, res) => {
   const { body } = req
-  if (!body) return
+  if (
+    !body.name ||
+    !body.exercises ||
+    !body.equipment ||
+    !body.trainerTips ||
+    !body.mode
+  ) {
+    res.status(400).send({
+      status: 'FAILED',
+      data: {
+        error:
+          "One of the following keys is missing or is empty in request body: 'name', 'mode', 'equipment', 'exercises', 'trainerTips'"
+      }
+    })
+    return
+  }
 
   const newWorkout = {
     name: body.name,
@@ -26,9 +62,14 @@ const createNewWorkout = (req, res) => {
   res.status(201).send({ status: 'OK', data: createdWorkout })
 }
 
-const updateOneWorkout = (req, res) => {
-  const updatedWorkout = workoutService.updateOneWorkout()
-  res.send('Update an existing workout')
+const updateWorkout = (req, res) => {
+  const { body } = req
+  const {
+    params: { workoutId }
+  } = req
+
+  const updatedWorkout = workoutService.updateWorkout({ workoutId, body })
+  res.status(200).send({ status: 'OK', data: updatedWorkout })
 }
 
 const deleteOneWorkout = (req, res) => {
@@ -38,8 +79,8 @@ const deleteOneWorkout = (req, res) => {
 
 module.exports = {
   getAllWorkouts,
-  getOneWorkout,
+  getWorkout,
   createNewWorkout,
-  updateOneWorkout,
+  updateWorkout,
   deleteOneWorkout
 }
